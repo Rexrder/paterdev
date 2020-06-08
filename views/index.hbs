@@ -1,1 +1,44 @@
-<h1>Buenas Buenas</h1>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    €/Unidade
+                </th>
+                <th>
+                    Gaveta
+                </th>
+                <th>
+                    Separador
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each prod}}
+            <tr>
+                <td>
+                    {{p_name}}
+                </td>
+                <td>
+                    {{quantity}}
+                </td>
+                <td>
+                    {{cost_unit}} €
+                </td>
+                <td>
+                    {{drawer}}
+                </td>
+                <td>
+                    {{sep}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
