@@ -4,7 +4,6 @@ morgan = require('morgan'),
 exphbs = require('express-handlebars'),
 mysql = require('mysql'),
 myConnection = require('express-myconnection');
-const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -27,8 +26,6 @@ app.use(myConnection(mysql, {
   port: 3306,
   database: 'paternoster'
   }, 'single'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 // Routes
 app.use(require('./routes/routes'));
