@@ -1,66 +1,14 @@
-<div class="container">
-    <div>
-
-    </div>
-</div>
-<div class="container p-4 mx-auto m-3">
-    {{#if prod}}
-    <table style="text-align: center;" class="table table-bordered">
-        <thead class='thead-dark'>
-            <tr>
-                <th>
-                    Produto
-                </th>
-                <th>
-                    Quantidade
-                </th>
-                <th>
-                    €/Unidade
-                </th>
-                <th>
-                    Gaveta
-                </th>
-                <th>
-                    Separador
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each prod}}
-            <tr>
-                <td>
-                    {{p_name}}
-                </td>
-                <td>
-                    {{quantity}}
-                </td>
-                <td>
-                    {{cost_unit}} €
-                </td>
-                <td>
-                    {{drawer}}
-                </td>
-                <td>
-                    {{sep}}
-                </td>
-                <td>
-                    <a href="/delete/{{id}}" class="btn btn-danger btn-sm" role="button">
-                    DELETE
-                    </a>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    {{else}}
-        <div class="container rounded mx-auto py-3 bg-dark text-white">
-            <h1 style="text-align: center;">There aren't any products yet</h1>
+{{#if user}}
+<div class="container p-5 h-100 d-flex align-items-center justify-content-center">
+        <div class="container rounded py-3 bg-dark text-white">
+            <h1 style="text-align: center;">Welcome to the Paternoster site</h1>
         </div>
-    {{/if}}
 </div>
-<div class="container mx-auto my-2">
-    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#form" role="button">
-        ADD
-    </button>
-    {{> addprod }}
+{{else}}
+<div class="container p-5 h-100 d-flex align-items-center justify-content-center">
+        <div class="container rounded py-3 bg-dark text-white">
+            <h1 style="text-align: center;">Welcome to the Paternoster site</h1>
+            <h1 style="text-align: center;">Login and start using the app</h1>
+        </div>
 </div>
+{{/if}}

@@ -4,6 +4,7 @@ morgan = require('morgan'),
 exphbs = require('express-handlebars'),
 mysql = require('mysql'),
 myConnection = require('express-myconnection');
+const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -30,9 +31,20 @@ app.use(myConnection(mysql, {
   }, 'single'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(flash());
 
 // Routes
-app.use(require('./routes/routes'));
+app.use(require('./routes/req.routes'));
+app.use(require('./routes/prof.routes'));
+app.use(require('./routes/list.routes'));
+
+// Global variables
+app.use((req, res, next) => {
+  app.locals.message = req.flash('message');
+  app.locals.success = req.flash('success');
+  app.locals.user = false;
+  next();
+});
 
 // Static Files
 app.use(express.static(path.join(__dirname,'public')));
