@@ -41,27 +41,24 @@ CREATE TABLE request
 
 CREATE TABLE drawsep
 (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     drawer SMALLINT(10) NOT NULL,
     sep SMALLINT(10) NOT NULL,
-    PRIMARY KEY (sep, drawer)
+    part SMALLINT(10) NOT NULL,
+    UNIQUE (drawer, sep, part)
 );
 
 CREATE TABLE prod_drawer
 (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    prod VARCHAR(50) NOT NULL,
-    CONSTRAINT `fk_prodrawer`
-        FOREIGN KEY (prod) REFERENCES product(p_name)
+    idprod INT(6) UNSIGNED NOT NULL,
+    iddraw INT(6) UNSIGNED NOT NULL,
+    CONSTRAINT `fk_prodraw`
+        FOREIGN KEY (idprod) REFERENCES product(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    drawer SMALLINT(10) NOT NULL,
     CONSTRAINT `fk_drawer`
-        FOREIGN KEY (drawer) REFERENCES drawsep(drawer)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    sep SMALLINT(10) NOT NULL,
-    CONSTRAINT `fk_sep`
-        FOREIGN KEY (sep) REFERENCES drawsep(sep)
+        FOREIGN KEY (iddraw) REFERENCES drawsep(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
