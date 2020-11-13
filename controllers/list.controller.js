@@ -1,54 +1,32 @@
 const controller = {};
 
-controller.mainp = (req,res) =>{
+const pool = require('../database');
+
+controller.mainp = async (req,res) =>{
     res.render('index');
 };
 
-controller.list = (req,res) =>{
-    if(!req.app.locals.user){
-        res.redirect('/');
-        next();
-    }
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM product', (err, prod) => {
-         if (err) {
-          res.json(err);
-         }
-         res.render('filters/objlist', { prod });
-        });
-    });
+controller.list = async (req,res) =>{
+    const prod = await pool.query('SELECT *, (quantity * cost_unit) FROM product');
+    res.render('filters/objlist', {prod});
 };
 
-controller.delete = (req,res) =>{
-    if(!req.app.locals.user){
-        res.redirect('/')
-    }
+controller.delete = async (req,res) =>{
     const { id } = req.params;
-    req.getConnection((err, conn) => {
-        conn.query('DELETE FROM product WHERE id = ?', [id], (err, prod) => {
-         if (err) {
-          res.json(err);
-         }
-         res.redirect('/objlist');
-        });
-    });
+    await pool.query('DELETE FROM product WHERE id = ?', [id]);
+    req.flash('success', 'Product Removed Successfully');
+    res.redirect('/objlist'); 
 };
 
-controller.redirect = (req,res) =>{
+controller.redirect = async (req,res) =>{
     res.redirect('/');
 };
 
-controller.add = (req,res) =>{
-    if(!req.app.locals.user){
-        res.redirect('/')
-    }
+controller.add = async (req,res) =>{
     const data = req.body;
     console.log(req.body);
-    req.getConnection((err, conn) => {
-        conn.query('INSERT INTO product set ?', data, (err,prod) => {
-            res.redirect('/objlist');
-        }); 
-    });
+    await pool.query('INSERT INTO product set ?', data);
+    res.redirect('/objlist'); 
 };
 
 module.exports = controller;

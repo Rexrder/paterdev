@@ -9,9 +9,7 @@ CREATE TABLE product
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     p_name VARCHAR(50) UNIQUE NOT NULL,
     quantity SMALLINT(50) UNSIGNED NOT NULL DEFAULT '0',
-    cost_unit DECIMAL(10,2) UNSIGNED,
-    drawer SMALLINT(10),
-    sep SMALLINT(10)
+    cost_unit DECIMAL(10,2) UNSIGNED
 );
 
 CREATE TABLE user
@@ -21,7 +19,6 @@ CREATE TABLE user
     password VARCHAR(60) NOT NULL,
     lastlog TIMESTAMP
 );
-
 
 CREATE TABLE request
 (
@@ -36,7 +33,7 @@ CREATE TABLE request
         FOREIGN KEY (user) REFERENCES user(username)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    dat TIMESTAMP
+    dat TIMESTAMP NOT NULL DEFAULT current_timestamp,
 );
 
 CREATE TABLE drawsep
