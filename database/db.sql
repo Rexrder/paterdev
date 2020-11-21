@@ -23,17 +23,18 @@ CREATE TABLE user
 CREATE TABLE request
 (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    prod VARCHAR(50) NOT NULL,
+    prod INT(6) UNSIGNED NOT NULL,
     CONSTRAINT `fk_prod`
-        FOREIGN KEY (prod) REFERENCES product(p_name)
+        FOREIGN KEY (prod) REFERENCES product(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    user VARCHAR(50) NOT NULL,
+    user INT(6) UNSIGNED NOT NULL,
     CONSTRAINT `fk_user`
-        FOREIGN KEY (user) REFERENCES user(username)
+        FOREIGN KEY (user) REFERENCES user(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    dat TIMESTAMP NOT NULL DEFAULT current_timestamp,
+    quantity SMALLINT(50) NOT NULL,
+    dat TIMESTAMP NOT NULL DEFAULT current_timestamp
 );
 
 CREATE TABLE drawsep

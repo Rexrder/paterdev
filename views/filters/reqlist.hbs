@@ -1,0 +1,44 @@
+<div class="container p-4 mx-auto m-3">
+    {{#if listed}}
+    <table style="text-align: center;" class="table table-bordered">
+        <thead class='thead-dark'>
+            <tr>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Utilizador
+                </th>
+                <th>
+                    Quantidade
+                </th>
+                <th>
+                    Data
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each listed}}
+            <tr>
+                <td>
+                    {{prod}}
+                </td>
+                <td>
+                    {{quant}}
+                </td>
+                <td>
+                    {{username}}
+                </td>
+                <td>
+                    {{dat}} €
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+        <div class="container rounded mx-auto py-3 bg-dark text-white">
+            <h1 style="text-align: center;">There aren't any requests yet</h1>
+        </div>
+    {{/if}}
+</div>

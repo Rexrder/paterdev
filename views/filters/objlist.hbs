@@ -32,11 +32,13 @@
                 <td>
                     {{'(quantity * cost_unit)'}} €
                 </td>
+                {{#if ../user.admin}}
                 <td>
                     <a href="objlist/delete/{{id}}" class="btn btn-danger btn-sm" role="button">
                     DELETE
                     </a>
                 </td>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>
@@ -47,9 +49,11 @@
         </div>
     {{/if}}
 </div>
+{{#if user.admin}}
 <div class="container mx-auto my-2">
     <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#form" role="button">
         ADD
     </button>
     {{> addprod }}
 </div>
+{{/if}}

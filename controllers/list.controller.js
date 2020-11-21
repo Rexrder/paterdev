@@ -24,7 +24,6 @@ controller.redirect = async (req,res) =>{
 
 controller.add = async (req,res) =>{
     const data = req.body;
-    console.log(req.body);
     await pool.query('INSERT INTO product set ?', data);
     res.redirect('/objlist'); 
 };
