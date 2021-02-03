@@ -17,6 +17,7 @@ CREATE TABLE user
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
+    admin TINYINT(1) DEFAULT 0,
     lastlog TIMESTAMP
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE request
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     quantity SMALLINT(50) NOT NULL,
+    reqtype TINYINT(1) DEFAULT 0,
     dat TIMESTAMP NOT NULL DEFAULT current_timestamp
 );
 

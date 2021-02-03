@@ -3,8 +3,6 @@ const controller = require('../controllers/list.controller');
 
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/',controller.mainp);
-
 router.use(isLoggedIn);
 
 router.get('/objlist',controller.list);

@@ -2,10 +2,6 @@ const controller = {};
 
 const pool = require('../database');
 
-controller.mainp = async (req,res) =>{
-    res.render('index');
-};
-
 controller.list = async (req,res) =>{
     const prod = await pool.query('SELECT *, (quantity * cost_unit) FROM product');
     res.render('filters/objlist', {prod});

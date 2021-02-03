@@ -1,6 +1,6 @@
 <div class="container p-4 mx-auto m-3">
     {{#if prod}}
-    <table style="text-align: center;" class="table table-bordered">
+    <table style="text-align: center;" class="table">
         <thead class='thead-dark'>
             <tr>
                 <th>
@@ -34,9 +34,14 @@
                 </td>
                 {{#if ../user.admin}}
                 <td>
-                    <a href="objlist/delete/{{id}}" class="btn btn-danger btn-sm" role="button">
+                    <a href="objlist/delete/{{id}}" class="btn btn-danger btn-sm btn-block" role="button">
                     DELETE
                     </a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-secondary btn-sm btn-block" data-toggle="modal" data-target="#form" role="button">
+                    EDIT
+                    </button>
                 </td>
                 {{/if}}
             </tr>

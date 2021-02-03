@@ -4,13 +4,16 @@
         <thead class='thead-dark'>
             <tr>
                 <th>
-                    Produto
+                    Product
                 </th>
                 <th>
-                    Utilizador
+                    Quantity
                 </th>
                 <th>
-                    Quantidade
+                    Type
+                </th>
+                <th>
+                    User
                 </th>
                 <th>
                     Data
@@ -21,16 +24,19 @@
             {{#each listed}}
             <tr>
                 <td>
-                    {{prod}}
+                    {{p_name}}
                 </td>
                 <td>
-                    {{quant}}
+                    {{quantity}}
+                </td>
+                <td>
+                    {{reqtype}}
                 </td>
                 <td>
                     {{username}}
                 </td>
                 <td>
-                    {{dat}} €
+                    {{timeago dat}}
                 </td>
             </tr>
             {{/each}}
@@ -41,4 +47,10 @@
             <h1 style="text-align: center;">There aren't any requests yet</h1>
         </div>
     {{/if}}
+</div>
+<div class="container mx-auto my-2">
+    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#form" role="button">
+        ADD
+    </button>
+    {{> addreq }}
 </div>

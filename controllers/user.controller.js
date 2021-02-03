@@ -2,6 +2,10 @@ const authCtrl = {};
 
 const passport = require('passport');
 
+authCtrl.mainp = async (req,res) =>{
+    res.render('index');
+};
+
 authCtrl.renderSignUp = (req, res) => {
     res.render('auth/signup');
 };
@@ -24,6 +28,7 @@ authCtrl.signIn = passport.authenticate('local.signin', {
 
 authCtrl.logout = (req, res, next) => {
     req.logOut();
+    res.redirect('/');
     res.redirect('/');
 };
 

@@ -1,0 +1,52 @@
+<div class="modal" id="form" role="form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Request</h3>
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/reqlist/add" method="POST">
+                        <div class="row">
+                            <div class="col">
+                                <select class="custom-select" placeholder="Product" name="prod" required>
+                                    {{#each product}}
+                                    <option value = {{id}}>{{p_name}}</option>
+                                    {{/each}}
+                                </select>
+                                <small class="form-text text-muted">Product</small>
+                            </div>
+                            <div class="col">
+                                <input type="number" step="1" min="1" class="form-control" placeholder="Quantity" name="quantity" required>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="reqtype" id="inlineRadio2" value="1" checked>
+                                <label class="form-check-label" for="inlineRadio2">Deposit</label>
+                            </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="reqtype" id="inlineRadio1" value="0">
+                                <label class="form-check-label" for="inlineRadio1">Withdrawal</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            REQUEST
+                        </button>
+                        {{#if user.admin}}
+                        <a class="btn btn-primary float-right" href="/objlist">
+                            REQUEST NEW PRODUCT
+                        </a>
+                        {{/if}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
