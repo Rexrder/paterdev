@@ -1,4 +1,4 @@
-<div class="container p-4 mx-auto m-3">
+<div class="container-lg p-4 mx-auto">
     {{#if listed}}
     <table style="text-align: center;" class="table table-bordered">
         <thead class='thead-dark'>
@@ -16,7 +16,7 @@
                     User
                 </th>
                 <th>
-                    Data
+                    Date
                 </th>
             </tr>
         </thead>
@@ -43,13 +43,13 @@
         </tbody>
     </table>
     {{else}}
-        <div class="container rounded mx-auto py-3 bg-dark text-white">
+        <div class="container-sm rounded mx-auto py-3 bg-dark text-white">
             <h1 style="text-align: center;">There aren't any requests yet</h1>
         </div>
     {{/if}}
 </div>
-<div class="container mx-auto my-2">
-    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#form" role="button">
+<div class="container-sm m-4 mx-auto">
+    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#formreq" role="button">
         ADD
     </button>
     {{> addreq }}

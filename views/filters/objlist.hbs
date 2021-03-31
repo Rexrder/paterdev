@@ -1,4 +1,4 @@
-<div class="container p-4 mx-auto m-3">
+<div class="container-md p-4 mx-auto">
     {{#if prod}}
     <table style="text-align: center;" class="table">
         <thead class='thead-dark'>
@@ -34,14 +34,14 @@
                 </td>
                 {{#if ../user.admin}}
                 <td>
-                    <a href="objlist/delete/{{id}}" class="btn btn-danger btn-sm btn-block" role="button">
+                    <a href="/objlist/delete/{{id}}" class="btn btn-danger mx-0 px-0 btn-sm btn-block" role="button">
                     DELETE
                     </a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-secondary btn-sm btn-block" data-toggle="modal" data-target="#form" role="button">
+                    <a href="/objlist/edit/{{id}}" class="btn btn-primary mx-0 px-0 btn-sm btn-block" role="button">
                     EDIT
-                    </button>
+                    </a>
                 </td>
                 {{/if}}
             </tr>
@@ -49,16 +49,15 @@
         </tbody>
     </table>
     {{else}}
-        <div class="container rounded mx-auto py-3 bg-dark text-white">
+        <div class="container-sm rounded mx-auto py-3 bg-dark text-white">
             <h1 style="text-align: center;">There aren't any products yet</h1>
         </div>
     {{/if}}
 </div>
 {{#if user.admin}}
-<div class="container mx-auto my-2">
-    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#form" role="button">
+<div class="container-sm m-4 mx-auto">
+    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#formprod" role="button">
         ADD
     </button>
-    {{> addprod }}
 </div>
 {{/if}}

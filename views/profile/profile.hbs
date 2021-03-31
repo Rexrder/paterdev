@@ -1,11 +1,17 @@
-<div class="container p-4">
+<div class="container-md p-4">
     <div class="row">
         <div class="col-md-4 mx-auto">
             <div class="card text-center">
                 <div class="card-body">
-                    <h3>Welcome {{user.username}}</h3>
-                    <img src="/images/user.svg" class="rounded mx-auto d-block" alt="logo" type='image/svg+xml'>
-                    <h4>Account created {{timeago user.lastlog}}</h4>
+                    <h3>Welcome <br/> {{user.username}}</h3>
+                    <img src="/img/user.png" class="card-img-top mx-auto m-2 w-50" alt="logo">
+                    <h4>Account created <br> {{timeago user.lastlog}}</h4>
+                    <button type="button" class="btn btn-success btn-sm mt-4 mx-3 px-4" data-toggle="modal" data-target="#changeName" role="button">
+                    EDIT
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm mt-4 mx-3 px-4" data-toggle="modal" data-target="#confirmDel" role="button">
+                    DELETE
+                    </button>
                 </div>
             </div>
         </div>

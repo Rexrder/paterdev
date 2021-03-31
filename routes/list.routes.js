@@ -5,9 +5,10 @@ const { isLoggedIn } = require('../lib/auth');
 
 router.use(isLoggedIn);
 
-router.get('/objlist',controller.list);
-router.get('/objlist/delete/:id',controller.delete);
-router.post('/objlist/add',controller.add);
-router.get('/*',controller.redirect);
+router.get('/',controller.list);
+router.get('/delete/:id',controller.delete);
+router.get('/edit/:id',controller.renderEdit);
+router.post('/edit/:id',controller.edit);
+router.post('/add',controller.add);
 
 module.exports = router;

@@ -5,7 +5,7 @@ const { isLoggedIn } = require('../lib/auth');
 
 router.use(isLoggedIn);
 
-router.get('/reqlist',controller.list);
-router.post('/reqlist/add',controller.add);
+router.get('/',controller.list);
+router.post('/add',controller.add);
 
 module.exports = router;

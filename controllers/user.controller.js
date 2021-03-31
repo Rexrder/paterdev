@@ -28,7 +28,7 @@ authCtrl.signIn = passport.authenticate('local.signin', {
 
 authCtrl.logout = (req, res, next) => {
     req.logOut();
-    res.redirect('/');
+    req.flash('success', 'Farewell');
     res.redirect('/');
 };
 
