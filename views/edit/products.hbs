@@ -1,0 +1,28 @@
+<div class="container-fluid mt-5 p-5">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3> Edit Product Information </h3>
+        </div>
+        <div class="card-body">
+          <form action="{{prods.id}}" method="POST">
+            <div class="form-group">
+                <input type="text" minlength="3" name="p_name" placeholder= "Product" class="form-control" value= {{prods.p_name}}>
+            </div>
+            <div class="form-group">
+                <input type="number" step="0.01" min="0" name="cost_unit" placeholder="€/Unit" class="form-control"value= {{prods.cost_unit}}>
+            </div>
+            <div class="form-group">
+                <input type="number" step="1" min="0" name="quantity" placeholder="Quantidade" class="form-control" value= {{prods.quantity}}>
+            </div>
+            <button class="btn btn-primary btn-block">
+              EDIT
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
