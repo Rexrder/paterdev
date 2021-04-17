@@ -7,10 +7,15 @@ passport = require('passport'),
 flash = require('connect-flash'),
 MySQLStore = require('express-mysql-session')(session),
 bodyParser = require('body-parser');
+eventEmitter = require('./lib/events');
+pool = require('./database');
 
 const { database } = require('./keys');
 
 const app = express();
+server = require('http').Server(app),
+io = require('socket.io')(server);
+
 require('./lib/passport');
 
 // Settings
@@ -47,10 +52,55 @@ app.use((req, res, next) => {
   app.locals.message = req.flash('message');
   app.locals.success = req.flash('success');
   app.locals.user = req.user;
+  app.locals.reqInProg;
+  app.locals.storeQuantity;
+  app.locals.storeRequest;
   next();
 });
 
-// Routes
+// Sockets
+var clients = 0;
+io.on('connection', (socket) => {
+  console.log(app.locals.user);
+  if (app.locals.user){
+    socket.join(app.locals.user.id);
+    console.log(app.locals.user.id);
+  }
+  socket.on('reqConfirmed', (confirmation) => {
+    if(confirmation){
+      pool.query('INSERT INTO request set ?', [app.locals.storeRequest]);
+      pool.query('UPDATE product set quantity = ? WHERE id = ?', [app.locals.storeQuantity,app.locals.storeRequest.prod]);
+     }
+    app.locals.reqInProg = false;
+  })
+  clients++;
+  eventEmitter.on('confirm', function (){
+    socket.to(app.locals.storeRequest.user).emit('askReqConfirm');
+    console.log("confirmed");
+    console.log(app.locals.storeRequest.user);
+  });
+    
+
+  if (clients == 1) {
+    io.sockets.emit('clientsconnected',{ description: clients + ' client connected!'});
+  }
+  else{
+    io.sockets.emit('clientsconnected',{ description: clients + ' clients connected!'});
+  }
+  console.log('user connected');
+  socket.on('disconnect', () => {
+    clients --;
+    if (clients == 1) {
+      io.sockets.emit('clientsconnected',{ description: clients + ' client connected!'});
+    }
+    else{
+      io.sockets.emit('clientsconnected',{ description: clients + ' clients connected!'});
+    }
+    console.log('user disconnected');
+  });
+});
+
+//Routes
 app.use(require('./routes/user.routes'));
 app.use('/reqlist',require('./routes/req.routes'));
 app.use('/objlist',require('./routes/list.routes'));
@@ -64,4 +114,4 @@ app.use(function (req,res,next){
 });
 
 // Start Server
-module.exports = app;
+module.exports = {app,server,io};

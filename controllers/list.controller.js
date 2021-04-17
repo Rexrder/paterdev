@@ -15,8 +15,38 @@ controller.delete = async (req,res) =>{
 };
 
 controller.add = async (req,res) =>{
-    const data = req.body;
-    await pool.query('INSERT INTO product set ?', data);
+    const {p_name,quantity,cost_unit,drawer,sep,part} = req.body;
+    const NewProd ={
+        p_name,
+        quantity,
+        cost_unit
+    }
+
+    const drawsepInfo ={
+        drawer,
+        sep,
+        part
+    }
+
+    const drawsepId = await pool.query('SELECT id FROM drawsep WHERE drawer = ? and sep = ? and part = ?', [drawsepInfo.drawer,drawsepInfo.sep,drawsepInfo.part]);
+
+    const confirmExistence = await pool.query('SELECT id FROM prod_drawer WHERE iddraw = ?', drawsepId[0].id);
+    
+    console.log(confirmExistence);
+
+    if (confirmExistence[0]) {
+        req.flash('message', 'There is another product in this specific drawer/separator');
+    }else{
+        const {insertId} = await pool.query('INSERT INTO product set ?', NewProd);
+
+        const prodDrawer = {
+            idprod: insertId,
+            iddraw: drawsepId[0].id
+        }
+        await pool.query('INSERT INTO prod_drawer set ?', prodDrawer);
+        req.flash('success', 'Product Added Successfully');
+    }
+
     res.redirect('/objlist'); 
 };
 
@@ -30,6 +60,7 @@ controller.edit = async (req,res) =>{
     const { id } = req.params;
     const data = req.body;
     await pool.query('UPDATE product set ? WHERE id = ?', [data,id]);
+    req.flash('success', 'Product Updated Successfully');
     res.redirect('/objlist'); 
 };
 

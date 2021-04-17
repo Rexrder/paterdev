@@ -62,3 +62,21 @@ CREATE TABLE prod_drawer
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+DELIMITER //
+
+CREATE PROCEDURE createSeparators()
+BEGIN
+    SET @count0 = 0;
+    SET @count1 = 0;
+    WHILE @count0<= 15 DO
+    WHILE @count1<= 2 DO
+        INSERT INTO drawsep(drawer,sep,part) VALUES(@count0, @count1, 0);
+        SET @count1 = @count1 + 1;
+    END WHILE;
+   SET @count0 = @count0 + 1;
+   SET @count1 = 0;
+    END WHILE;
+END;
+//
+DELIMITER ;

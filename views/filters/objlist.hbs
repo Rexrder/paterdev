@@ -1,19 +1,22 @@
 <div class="container-md p-4 mx-auto">
     {{#if prod}}
-    <table style="text-align: center;" class="table">
+    <table style="text-align: center;" class="table table-responsive-md">
         <thead class='thead-dark'>
             <tr>
-                <th>
-                    Produto
+                <th scope="col">
+                    Product
                 </th>
-                <th>
-                    Quantidade
-                </th>
-                <th>
-                    €/Unidade
-                </th>
-                <th>
+                <th scope="col">
+                    Quantity
+                </th scope="col">
+                <th scope="col">
+                    €/Unit
+                </th scope="col">
+                <th scope="col">
                     Total
+                </th>
+                <th scope="col" colspan="2">
+                    Settings
                 </th>
             </tr>
         </thead>
@@ -33,13 +36,13 @@
                     {{'(quantity * cost_unit)'}} €
                 </td>
                 {{#if ../user.admin}}
-                <td>
-                    <a href="/objlist/delete/{{id}}" class="btn btn-danger mx-0 px-0 btn-sm btn-block" role="button">
+                <td class="nospacebutton">
+                    <a href="/objlist/delete/{{id}}" class="btn btn-danger mx-0 px-2 btn-sm" role="button">
                     DELETE
                     </a>
                 </td>
-                <td>
-                    <a href="/objlist/edit/{{id}}" class="btn btn-primary mx-0 px-0 btn-sm btn-block" role="button">
+                <td class="nospacebutton">
+                    <a href="/objlist/edit/{{id}}" class="btn btn-primary mx-0 px-2 btn-sm" role="button">
                     EDIT
                     </a>
                 </td>
@@ -55,7 +58,7 @@
     {{/if}}
 </div>
 {{#if user.admin}}
-<div class="container-sm m-4 mx-auto">
+<div class="container-sm m-2 mx-auto pb-5">
     <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#formprod" role="button">
         ADD
     </button>

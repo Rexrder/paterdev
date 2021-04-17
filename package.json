@@ -17,9 +17,11 @@
     "jquery": "^3.6.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "onoff": "^6.0.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "popper.js": "^1.16.1",
+    "socket.io": "^4.0.1",
     "timeago": "^1.6.7",
     "timeago.js": "^4.0.2"
   },

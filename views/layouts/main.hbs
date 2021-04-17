@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paternoster</title>
+    <title>PAI</title>
     {{! BOOTSTRAP 4}}
     <link rel="icon" href="/img/favicon.png" type="image/png"/>
     <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css"/>
@@ -16,8 +16,12 @@
     {{>message}}
     {{{body}}}
     {{>forms}}
+    {{>footer}}
 
     {{! SCRIPTS }}
+  <script src= "/socket.io/socket.io.js"></script>
+  <script src="/socket.js">
+  </script>
   <script src="/modules/jquery/dist/jquery.slim.min.js"></script>
   <script src="/modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

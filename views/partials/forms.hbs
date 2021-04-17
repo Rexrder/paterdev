@@ -9,18 +9,35 @@
                 </div>
                 <div class="modal-body">
                     <form action="/objlist/add" method="POST">
-                        <div class="form-group">
-                            <input type="text" minlength="3" name="p_name" placeholder="Product" class="form-control">
+                        <div class= "row">
+                            <div class="form-group col">
+                                <input type="text" minlength="3" name="p_name" placeholder="Product" class="form-control" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="number" step="0.01" min="0" name="cost_unit" placeholder="€/Unit" class="form-control">
+                        <div class= "row">
+                            <div class="form-group col">
+                                <label for="inputE_Unit">€/Unit</label>
+                                <input type="number" step="0.01" min="0" name="cost_unit" id="inputE_Unit" placeholder="€/Unit" class="form-control" value="0">
+                            </div>
+                            <div class="form-group col">
+                                <label for="inputQuantitity">Quantitity</label>
+                                <input type="number" step="1" min="0" name="quantity" id="inputQuantitity" placeholder="Quantity" class="form-control" value="0">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="number" step="1" min="0" name="quantity" placeholder="Quantidade" class="form-control">
+                        <div class= "row">
+                            <div class="form-group col">
+                                <label for="inputDrawer">Drawer</label>
+                                <input type="number" step="1" min="0" max="15" name="drawer" placeholder="Drawer" id="inputDrawer" class="form-control" required>
+                            </div>
+                            <div class="form-group col">
+                                <label for="inputSeparator">Separator</label>
+                                <input type="number" step="1" min="0" max="15" name="sep" id="inputSeparator" placeholder="Separator" class="form-control" value="0">
+                            </div>
+                            <div class="form-group col">
+                                <label for="inputPart">Part</label>
+                                <input type="number" step="1" min="0" max="15" name="part" id="inputPart" placeholder="Part" class="form-control" value="0">
+                            </div>
                         </div>
-                        {{!<div class="form-group">
-                            <input type="number" step="1" min="1" max="16" name="drawer" placeholder="Gaveta" class="form-control">
-                        </div>!}}
                         <button class="btn btn-primary btn-block">
                             ADD
                         </button>
@@ -83,7 +100,6 @@
         </div>
     </div>
 
-
 <div class="modal" id="confirmDel" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -100,6 +116,25 @@
             YES
         </a>
         <button type="button" class="btn btn-secondary btn-sm my-3 mx-3 px-4" data-dismiss="modal">
+            NO
+        </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="reqConfModal" data-backdrop="static"  tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Request Confirmation</h5>
+      </div>
+      <div class="modal-body">
+        <p>The products have been delivered succesfully. Were they taken?</p>
+      </div>
+      <a type= "button" id="confReqButton" class="btn btn-primary btn-sm mt-0 mx-3 px-4" data-dismiss="modal">
+            YES
+        </a>
+        <button type="button"  id="unconfReqButton" class="btn btn-secondary btn-sm my-3 mx-3 px-4" data-dismiss="modal">
             NO
         </button>
     </div>
