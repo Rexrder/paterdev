@@ -1,7 +1,7 @@
 const controller = {};
 
 const pool = require('../database');
-const eventEmitter = require('../lib/events');
+const {eventEmitter} = require('../lib/events');
 
 controller.list = async (req,res) =>{
     const listed = await pool.query('SELECT request.id, product.p_name, request.quantity, request.reqtype, request.dat, user.username FROM request INNER JOIN user ON request.user = user.id INNER JOIN product ON request.prod = product.id ORDER BY request.dat DESC');
@@ -24,6 +24,7 @@ controller.add = async (req,res) =>{
     };
 
     const init_quantity = await pool.query('SELECT quantity FROM product WHERE id = ?',[prod]);
+    const newDraw = await pool.query('SELECT drawer FROM drawsep INNER JOIN prod_drawer ON drawsep.id = prod_drawer.iddraw INNER JOIN product ON prod_drawer.idprod = product.id WHERE product.id = ?',[prod]); 
 
     console.log(req.app.locals.reqInProg);
 
@@ -48,7 +49,7 @@ controller.add = async (req,res) =>{
         req.app.locals.storeRequest = newRequest;
         req.app.locals.storeQuantity = quantity_result;
 
-        eventEmitter.emit('srcDraw');
+        eventEmitter.emit('srcDraw',newDraw[0].drawer);
 
         req.app.locals.reqInProg = true;
     } else {
