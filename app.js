@@ -117,7 +117,7 @@ eventEmitter.on('srcDraw', function (newDraw){
   console.log(newDraw);
   console.log(result);
   if (result != 0){
-      if (result > 7 || (result > -7 && result < 0)){
+      if (result >= 8 || (result >= -8 && result < 0)){
           inSen[1].watch((err, value) => {
               if (err) {
                   throw err;
