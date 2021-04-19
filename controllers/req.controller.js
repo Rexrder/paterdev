@@ -24,6 +24,7 @@ controller.add = async (req,res) =>{
     };
 
     const init_quantity = await pool.query('SELECT quantity FROM product WHERE id = ?',[prod]);
+    const newDraw = await pool.query('SELECT drawer FROM drawsep INNER JOIN prod_drawer ON drawsep.id = prod_drawer.iddraw INNER JOIN product ON prod_drawer.idprod = product.id WHERE product.id = ?',[prod]); 
 
     console.log(req.app.locals.reqInProg);
 
@@ -48,7 +49,7 @@ controller.add = async (req,res) =>{
         req.app.locals.storeRequest = newRequest;
         req.app.locals.storeQuantity = quantity_result;
 
-        eventEmitter.emit('srcDraw');
+        eventEmitter.emit('srcDraw',req.app.locals.draw,newDraw);
 
         req.app.locals.reqInProg = true;
     } else {

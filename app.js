@@ -55,6 +55,8 @@ app.use((req, res, next) => {
   app.locals.reqInProg;
   app.locals.storeQuantity;
   app.locals.storeRequest;
+  app.locals.confirm;
+  app.locals.draw;
   next();
 });
 
@@ -71,15 +73,20 @@ io.on('connection', (socket) => {
       pool.query('INSERT INTO request set ?', [app.locals.storeRequest]);
       pool.query('UPDATE product set quantity = ? WHERE id = ?', [app.locals.storeQuantity,app.locals.storeRequest.prod]);
      }
+     app.locals.confirm = false;
     app.locals.reqInProg = false;
   })
   clients++;
   eventEmitter.on('confirm', function (){
     socket.to(app.locals.storeRequest.user).emit('askReqConfirm');
+    app.locals.confirm = true;
     console.log("confirmed");
     console.log(app.locals.storeRequest.user);
   });
-    
+
+  if (app.locals.confirm){
+    eventEmitter.emit('confirm');
+  }    
 
   if (clients == 1) {
     io.sockets.emit('clientsconnected',{ description: clients + ' client connected!'});
@@ -114,4 +121,4 @@ app.use(function (req,res,next){
 });
 
 // Start Server
-module.exports = {app,server,io};
+module.exports = {app,server,eventEmitter};
