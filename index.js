@@ -1,14 +1,11 @@
 const dotenv = require('dotenv');
 dotenv.config();
-const GpioSt = require ('onoff').Gpio;
-const zerIn = new GpioSt(13, 'in', 'rising', {debounceTimeout: 10});
-const movIn = new GpioSt(5, 'out');
 
 /**
  * Importing the Main App
  */
 
-const {app,server} = require('./app');
+const { app,server, mov, inSen } = require('./app');
 
 app.set('socketio',io);
 app.locals.draw = 0;
@@ -16,18 +13,16 @@ app.locals.reqInProg = false;
 app.locals.confirm = false;
 
 //Wait until Drawer 0
-movIn.writeSync(1);
-zerIn.watch((err, value) => {
+mov[0].writeSync(1);
+inSen[0].watch((err, value) => {
     if (err) {
         throw err;
     }
     if(value){
-        movIn.write(0);
+        mov[0].write(0);
         server.listen(app.get('port'));
         console.log('Server is in port', app.get('port'));
-        zerIn.unwatchAll();
-        movIn.unexport();
-        zerIn.unexport();
+        inSen[0].unwatch();
     }
 });
 /*server.listen(app.get('port'));

@@ -1,3 +1,5 @@
+const { Gpio } = require('onoff');
+
 const express = require('express'),
 path = require('path'),
 morgan = require('morgan'),
@@ -6,8 +8,8 @@ session = require('express-session'),
 passport = require('passport'),
 flash = require('connect-flash'),
 MySQLStore = require('express-mysql-session')(session),
-bodyParser = require('body-parser');
-eventEmitter = require('./lib/events');
+bodyParser = require('body-parser'),
+{eventEmitter, mov, inSen} = require('./lib/events');
 pool = require('./database');
 
 const { database } = require('./keys');
@@ -107,6 +109,77 @@ io.on('connection', (socket) => {
   });
 });
 
+//Events
+eventEmitter.on('srcDraw', function (newDraw){
+  inSen[1].unwatch();
+  var result = newDraw - app.locals.draw;
+  console.log(app.locals.draw);
+  console.log(newDraw);
+  console.log(result);
+  if (result != 0){
+      if (result > 6 || (result > -6 && result < 0)){
+          inSen[1].watch((err, value) => {
+              if (err) {
+                  throw err;
+              }
+              if (value){
+                  app.locals.draw--;
+                  if(app.locals.draw < 0) app.locals.draw = 15;
+                  console.log(app.locals.draw);
+              } 
+              if (app.locals.draw == newDraw){
+                  mov[0].writeSync(0);
+                  eventEmitter.emit('confirm');
+                  console.log('ready');
+                  inSen[1].unwatch();
+              }
+          });
+          mov[0].writeSync(1);
+      } 
+      else{
+          inSen[1].watch((err, value) => {
+              if (err) {
+                  throw err;
+              }
+              if (value){
+                  app.locals.draw++;
+                  if(app.locals.draw > 15) app.locals.draw = 0;
+                  console.log(app.locals.draw);
+              } 
+              if (app.locals.draw == newDraw){
+                  mov[1].writeSync(0);
+                  eventEmitter.emit('confirm');
+                  console.log('ready');
+                  inSen[1].unwatch();
+              }            
+          });
+          mov[1].writeSync(1);
+      } 
+  }
+  else{
+      eventEmitter.emit('confirm');
+      console.log('ready');
+  }
+  inSen[0].watch((err, value) => {
+      if (err) {
+        throw err;
+      }
+      app.locals.draw = 0;
+  });
+  /*setTimeout(function(){
+      eventEmitter.emit('confirm');
+      console.log('ready');
+  },5000);*/
+});
+
+process.on('SIGINT', _ => {
+  mov[0].unexport();
+  mov[1].unexport();
+  inSen[0].unexport();
+  inSen[1].unexport();
+  process.exit(0);
+});
+
 //Routes
 app.use(require('./routes/user.routes'));
 app.use('/reqlist',require('./routes/req.routes'));
@@ -121,4 +194,4 @@ app.use(function (req,res,next){
 });
 
 // Start Server
-module.exports = {app,server,eventEmitter};
+module.exports = {app,server, mov, inSen};
