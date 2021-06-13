@@ -21,7 +21,7 @@ io = require('socket.io')(server);
 require('./lib/passport');
 
 // Settings
-app.set('port',3000);
+app.set('port',process.env.NODE_PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
   extname: 'hbs',

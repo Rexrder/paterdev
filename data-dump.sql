@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for debian-linux-gnu (aarch64)
+-- MariaDB dump 10.19  Distrib 10.5.10-MariaDB, for debian-linux-gnu (aarch64)
 --
 -- Host: localhost    Database: paternoster
 -- ------------------------------------------------------
--- Server version	10.5.9-MariaDB-1:10.5.9+maria~focal
+-- Server version	10.5.10-MariaDB-1:10.5.10+maria~focal
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -151,7 +151,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('4s14_069EEXF8KzqbM5ZCSTWAFt5rYaA',1618970176,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":4}}'),('FdzgTscOq_JovwjQ3vnZBTgRVAZucTlB',1618965374,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":5}}'),('o6t8FukwS23G-5C6OqKGa-fShhdl3J6Y',1618965451,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":5}}'),('v3iXKt1kPKUoW-jYsnVrp8hROK_Uo5-h',1618880035,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+INSERT INTO `sessions` VALUES ('BiiePZTz2iquZPiEUqMx1HA2NxiKhpGC',1623636581,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-13  1:34:52
+-- Dump completed on 2021-06-13 17:29:48

@@ -1,0 +1,1 @@
+echo "Please find attached the backup file" | mutt -a "/home/ubuntu/paterdev/paterdev/data-dump.sql" -s "File attached" -- 33742@aeaf.edu.pt
