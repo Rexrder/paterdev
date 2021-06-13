@@ -13,6 +13,9 @@
                     €/Unit
                 </th scope="col">
                 <th scope="col">
+                    Drawer
+                </th scope="col">
+                <th scope="col">
                     Total
                 </th>
                 {{#if ../user.admin}}
@@ -35,7 +38,10 @@
                     {{cost_unit}} €
                 </td>
                 <td>
-                    {{'(quantity * cost_unit)'}} €
+                    {{drawer}}
+                </td>
+                <td>
+                    {{'(product.quantity * product.cost_unit)'}} €
                 </td>
                 {{#if ../user.admin}}
                 <td class="nospacebutton">
@@ -51,6 +57,27 @@
                 {{/if}}
             </tr>
             {{/each}}
+            <tr>
+                <td>  
+                </td>
+                <td>    
+                </td>
+                <td>   
+                </td>
+                <td>    
+                </td>
+                <td>
+                     {{sum.total}} € 
+                </td>
+                {{#if ../user.admin}}
+                <td class="nospacebutton">
+                    
+                </td>
+                <td class="nospacebutton">
+                    
+                </td>
+                {{/if}}
+            </tr>
         </tbody>
     </table>
     {{else}}

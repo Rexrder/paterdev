@@ -3,8 +3,11 @@ const controller = {};
 const pool = require('../database');
 
 controller.list = async (req,res) =>{
-    const prod = await pool.query('SELECT *, (quantity * cost_unit) FROM product');
-    res.render('filters/objlist', {prod});
+    const prod = await pool.query('SELECT product.id, product.p_name, product.quantity, product.cost_unit, drawsep.drawer, (product.quantity * product.cost_unit) FROM product INNER JOIN prod_drawer ON product.id = prod_drawer.idprod INNER JOIN drawsep ON prod_drawer.iddraw = drawsep.id');
+    const tot = await pool.query('SELECT SUM(quantity*cost_unit) AS total FROM product');
+    var sum = {total: tot[0].total};
+    console.log(sum);
+    res.render('filters/objlist', {prod,sum});
 };
 
 controller.delete = async (req,res) =>{
